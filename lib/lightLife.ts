@@ -17,6 +17,7 @@ export class LightLife {
     this.location = new _Location()
     this.action = new Action()
     this.event = new _Event()
+    this.state = new State()
 
     const params = new Params(this)
     this.setParams(params)

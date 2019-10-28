@@ -8,7 +8,6 @@ import { Params } from './params'
 export class State {
   status: Status
   flag: Flag
-  history: History
   inventory: Inventory
   values: Values
   gameDate: GameDate
@@ -16,7 +15,6 @@ export class State {
   constructor() {
     this.inventory = new Inventory()
     this.flag = new Flag()
-    this.history = new History()
     this.gameDate = new GameDate()
     this.values = new Values()
     this.status = new Status()
