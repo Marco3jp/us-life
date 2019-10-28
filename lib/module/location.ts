@@ -1,6 +1,6 @@
 import { Location as LocationModel } from '../model/location'
 import { Params } from './params'
-import { LocationList } from '../../assets/gameAssets/locationList'
+import { LocationList } from '../gameAssets/locationList'
 import { ViewScript } from '../model/viewScript'
 
 

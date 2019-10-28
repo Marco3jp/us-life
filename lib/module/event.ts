@@ -1,7 +1,7 @@
 import { Event as EventModel } from '../model/event'
 import { ViewScript } from '../model/viewScript'
 import { Params } from './params'
-import { EventList } from '../../assets/gameAssets/eventList'
+import { EventList } from '../gameAssets/eventList'
 import { Action } from '../model/action'
 
 export class _Event {

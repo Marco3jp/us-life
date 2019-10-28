@@ -1,5 +1,5 @@
 import { Item as ItemModel } from '../model/item'
-import { ItemList } from '../../assets/gameAssets/itemList'
+import { ItemList } from '../gameAssets/itemList'
 
 export class Item {
   item: Array<any>

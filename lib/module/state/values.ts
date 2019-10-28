@@ -1,5 +1,5 @@
 import { generateLocalStorageHandler } from '../util/generateLocalStorageHandler'
-import { ValueList } from '../../../assets/gameAssets/valueList'
+import { ValueList } from '../../gameAssets/valueList'
 
 export class Values {
   constructor() {

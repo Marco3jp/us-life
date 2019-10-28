@@ -1,5 +1,5 @@
 import { generateLocalStorageHandler } from '../util/generateLocalStorageHandler'
-import { StatusList } from '../../../assets/gameAssets/statusList'
+import { StatusList } from '../../gameAssets/statusList'
 
 export class Status {
   constructor() {

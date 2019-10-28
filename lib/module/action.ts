@@ -1,6 +1,6 @@
 import { Action as ActionModel } from '../model/action'
 import { Params } from './params'
-import { ActionList } from '../../assets/gameAssets/actionList'
+import { ActionList } from '../gameAssets/actionList'
 import { ViewScript } from '../model/viewScript'
 
 export class Action {
