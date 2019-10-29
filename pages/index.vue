@@ -21,6 +21,9 @@
         <v-btn color="primary" nuxt :to=playLink>
           PLAY
         </v-btn>
+        <v-btn color="primary" nuxt to="/testPage">
+          TEST
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-layout>
