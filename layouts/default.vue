@@ -39,16 +39,11 @@
 </template>
 
 <script>
-  import { LightLife } from '../lib/lightLife.ts'
-
   export default {
     data() {
       return {
         title: 'us-life'
       }
-    },
-    created() {
-      this.$store.commit('life/set', new LightLife())
     }
   }
 </script>
