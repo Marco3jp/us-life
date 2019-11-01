@@ -1,7 +1,8 @@
-import { SentenceType } from '~/lib/model/viewScript/sentenceType'
+import { SectionType } from '~/lib/model/viewScript/sectionType'
 import { ControlEnum } from '~/lib/model/viewScript/controlEnum'
 import { DirectionEnum } from '~/lib/model/viewScript/directionEnum'
 import { Sentence } from '~/lib/model/viewScript/sentence'
+import { ErrorEnum } from '~/lib/model/viewScript/errorEnum'
 
 /**
  * 本文や演出、制御などの"一文"を持つインターフェイス。
@@ -9,7 +10,7 @@ import { Sentence } from '~/lib/model/viewScript/sentence'
  * パラメータを渡すArgsを持つ。
  */
 export interface ViewSection {
-  type: SentenceType,
-  body: Sentence | DirectionEnum | ControlEnum,
+  type: SectionType,
+  body: Sentence | DirectionEnum | ControlEnum | ErrorEnum,
   args?: Array<string>
 }
