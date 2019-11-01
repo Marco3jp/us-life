@@ -618,13 +618,13 @@ export let EventList: Array<EventModel> = [
       // params.state.inventory.addItem(100, 2) // 水
       params.state.inventory.addItem(101, 1) // 缶入りパン
       params.state.gameDate.progress(params.state.gameDate.calculateProgressLength('1-30-0'))
+      params.state.flag.setFlag('gotStock', true)
     },
     effectText: '',
     id: 5,
     name: '備蓄品配布',
     require: (params: Params) => {
-      return (params.state.flag.getFlag('newsProject')
-        || params.state.flag.getFlag('recordProject'))
+      return !params.state.flag.getFlag('gotStock')
         && params.state.gameDate.now() > Date.parse('2019-11-2 17:00')
     },
     requireText: '',
