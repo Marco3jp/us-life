@@ -9,7 +9,7 @@ export class GameDate {
     if (storedTime !== null) {
       this.time = parseInt(storedTime)
     } else {
-      this.time = 0
+      this.time = Date.parse('2019-11-1 18:00')
       this.storeDate()
     }
   }
@@ -18,6 +18,7 @@ export class GameDate {
     return this.time
   }
 
+  // progress(calculateProgressLength("1-6-30-0")) -> progress 1d6h30m0s
   progress(length: number) {
     this.time += length
   }
@@ -68,7 +69,7 @@ export class GameDate {
    * 一致は下位から行われる。仮に引数が"10-5"なら10分5秒として解釈する
    * もし一日としたかったら、1-0-0-0とすること
    */
-  static calculateProgressLength(dateString: string): number {
+  calculateProgressLength(dateString: string): number {
     const unitWeight = [1000, 60, 60, 24]
     const splitDateString = dateString.split('-', 4).reverse()
     let parsedDateNumber: Array<number> = []
