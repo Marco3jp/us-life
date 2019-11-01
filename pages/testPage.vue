@@ -6,7 +6,7 @@
 
 <script>
   import Console from '../components/console'
-  import { SentenceType } from '../lib/model/viewScript/sentenceType'
+  import { SectionType } from '../lib/model/viewScript/sectionType'
   import { ControlEnum } from '../lib/model/viewScript/controlEnum'
 
   export default {
@@ -25,66 +25,66 @@
               text: 'あさだよおおおおおおおおおおおお！！！！',
               by: '？？？'
             },
-            type: SentenceType.TEXT
+            type: SectionType.TEXT
           },
           {
             body: {
               text: '朝というのに叫び声がする。おそらく朝ではないんだろう。',
               by: ''
             },
-            type: SentenceType.TEXT
+            type: SectionType.TEXT
           },
           {
             body: {
               text: '起きてえええええええええカンカンカンカン！！！',
               by: '？？？'
             },
-            type: SentenceType.TEXT
+            type: SectionType.TEXT
           },
           {
             body: {
               text: '作業していて寝落ちた記憶はある……まだ眠い……。',
               by: ''
             },
-            type: SentenceType.TEXT
+            type: SectionType.TEXT
           },
           {
             body: {
               text: 'コ○トコ行くって話だったんだから起きろおおおお！！！',
               by: '？？？'
             },
-            type: SentenceType.TEXT
+            type: SectionType.TEXT
           },
           {
             body: {
               text: 'おはよおおおおおお！！！！',
               by: '？？？'
             },
-            type: SentenceType.TEXT
+            type: SectionType.TEXT
           },
           {
             body: {
               text: 'これが私たちのある日。ちなみにこれは太陽が沈む頃――18時の話だ。',
               by: ''
             },
-            type: SentenceType.TEXT
+            type: SectionType.TEXT
           },
           {
             body: ControlEnum.endSection,
-            type: SentenceType.CONTROL
+            type: SectionType.CONTROL
           }
         ]
       }
     },
     methods: {
       pushSentenceToBuffer() {
-        if (this.sections[this.currentSection].type === SentenceType.TEXT) {
+        if (this.sections[this.currentSection].type === SectionType.TEXT) {
           this.$store.commit('sentence/resetCharacter')
           this.$store.commit('sentence/resetSection')
           this.$store.commit('sentence/setCurrentSentenceLength', this.sections[this.currentSection].body.text.length)
           this.$store.commit('console/push', this.sections[this.currentSection].body)
           this.startAutoCharacterDisplay()
-        } else if (this.sections[this.currentSection].type === SentenceType.CONTROL) {
+        } else if (this.sections[this.currentSection].type === SectionType.CONTROL) {
           if (this.sections[this.currentSection].body === ControlEnum.endSection) {
             alert('Finished Current Story.')
           } else {
