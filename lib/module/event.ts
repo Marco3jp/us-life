@@ -3,6 +3,7 @@ import { ViewScript } from '../model/viewScript'
 import { Params } from './params'
 import { EventList } from '../gameAssets/eventList'
 import { Action } from '../model/action'
+import { SentenceType } from '~/lib/model/viewScript/sentenceType'
 
 export class _Event {
   private eventDb: Array<EventModel>
@@ -59,10 +60,26 @@ export class _Event {
       if (result !== undefined) {
         result.toBeContinue = this.currentlyEvents.length !== 0
       } else {
-        result = { script: ['error'], toBeContinue: false }
+        result = {
+          sections: [{
+            type: SentenceType.TEXT,
+            body: {
+              text: 'sample',
+              by: 'test'
+            }
+          }]
+        }
       }
     } else {
-      result = { script: ['error'], toBeContinue: false }
+      result = {
+        sections: [{
+          type: SentenceType.TEXT,
+          body: {
+            text: 'errorSample',
+            by: 'test'
+          }
+        }]
+      }
     }
     return result
   }

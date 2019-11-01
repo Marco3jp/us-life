@@ -2,6 +2,7 @@ import { Location as LocationModel } from '../model/location'
 import { Params } from './params'
 import { LocationList } from '../gameAssets/locationList'
 import { ViewScript } from '../model/viewScript'
+import { SentenceType } from '~/lib/model/viewScript/sentenceType'
 
 
 export class _Location {
@@ -43,7 +44,15 @@ export class _Location {
         return location.script
       }
     }
-    return { script: [''] }
+    return {
+      sections: [{
+        type: SentenceType.TEXT,
+        body: {
+          text: 'sample',
+          by: 'test'
+        }
+      }]
+    }
   }
 
   /**

@@ -2,6 +2,7 @@ import { Action as ActionModel } from '../model/action'
 import { Params } from './params'
 import { ActionList } from '../gameAssets/actionList'
 import { ViewScript } from '../model/viewScript'
+import { SentenceType } from '~/lib/model/viewScript/sentenceType'
 
 export class Action {
   private actionDb: Array<ActionModel>
@@ -29,9 +30,25 @@ export class Action {
     if (action.require) {
       action.effect(this.params)
       // TODO: 行動時に適切なViewScriptを返す
-      return { script: ['success'],toBeContinue: false }
+      return {
+        sections: [{
+          type: SentenceType.TEXT,
+          body: {
+            text: 'sample',
+            by: 'test'
+          }
+        }]
+      }
     } else {
-      return { script: ['error'], toBeContinue:false }
+      return {
+        sections: [{
+          type: SentenceType.TEXT,
+          body: {
+            text: 'errorSample',
+            by: 'test'
+          }
+        }]
+      }
     }
   }
 }

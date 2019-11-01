@@ -2,6 +2,7 @@ import { InventoryRecord } from '../../model/inventoryRecord'
 import { Params } from '../params'
 import { Item as ItemModel } from '../../model/item'
 import { ViewScript } from '../../model/viewScript'
+import { SentenceType } from '~/lib/model/viewScript/sentenceType'
 
 export class Inventory {
   inventory: Array<InventoryRecord>
@@ -88,9 +89,25 @@ export class Inventory {
       this.inventory[index].item.effect(this.params)
       this.saveInventory()
       // TODO: アイテム使用時に適切なViewScriptを返す
-      return { script: ['success'] }
+      return {
+        sections: [{
+          type: SentenceType.TEXT,
+          body: {
+            text: 'sample',
+            by: 'test'
+          }
+        }]
+      }
     } else {
-      return { script: ['error'] }
+      return {
+        sections: [{
+          type: SentenceType.TEXT,
+          body: {
+            text: 'errorSample',
+            by: 'test'
+          }
+        }]
+      }
     }
   }
 
