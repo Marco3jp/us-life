@@ -21,6 +21,7 @@ export class LightLife {
 
     const params = new Params(this)
     this.setParams(params)
+    this.state.inventory.setItemDb(this.item)
   }
 
   setParams(params: Params) {

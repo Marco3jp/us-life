@@ -1,6 +1,6 @@
 import { Item } from './item'
 
 export interface InventoryRecord {
-  item: Item,
+  itemId: number,
   number: number
 }
