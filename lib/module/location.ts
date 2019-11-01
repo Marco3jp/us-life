@@ -2,16 +2,19 @@ import { Location as LocationModel } from '../model/location'
 import { Params } from './params'
 import { LocationList } from '../gameAssets/locationList'
 import { ViewScript } from '../model/viewScript'
-import { SentenceType } from '~/lib/model/viewScript/sentenceType'
-
 
 export class _Location {
-  private locationDb: Array<LocationModel>
+  private readonly locationDb: Array<LocationModel>
+  private locationIndex: Map<number, number>
   private params: Params
   private currentLocation: LocationModel
 
   constructor() {
     this.locationDb = LocationList
+    this.locationDb.forEach((entry, index) => {
+      this.locationIndex.set(entry.id, index)
+    })
+    this.loadCurrentLocation()
   }
 
   setParams(params: Params) {
@@ -22,60 +25,30 @@ export class _Location {
     return this.currentLocation
   }
 
+  getLocationById(id: number): LocationModel | undefined {
+    const index = this.locationIndex.get(id)
+    if (typeof index !== 'undefined') {
+      return this.locationDb[index]
+    } else {
+      return undefined
+    }
+  }
+
   /**
-   * 移動可能なロケーションを返す
-   * 移動可能な場所がない場合空のArrayを返すので、エラーチェックしないと正しく動いてしまって詰んでしまうので注意。
+   * 今回の実装では全て返す
    */
   getMovableLocations(): Array<LocationModel> {
-    let result: Array<LocationModel> = []
-
-    this.locationDb.forEach((location: LocationModel) => {
-      if (location.require(this.params)) {
-        result.push(location)
-      }
-    })
-    return result
+    return this.locationDb
   }
 
   move(location: LocationModel): ViewScript {
-    if (location.require(this.params)) {
-      this.currentLocation = location
-      if (typeof location.script !== 'undefined') {
-        return location.script
-      }
-    }
+    this.currentLocation = location
+
     return {
-      sections: [{
-        type: SentenceType.TEXT,
-        body: {
-          text: 'sample',
-          by: 'test'
-        }
-      }]
+      silent: true
     }
   }
 
-  /**
-   * ロケーション間の直線距離を計算する。もしaltitudeがtrueの場合、z軸も用いた計算を行う。
-   * 後にLocationModelがDistanceを持った場合、その値をProxyする形になり、将来的に直線距離の算出は非推奨にする予定(削除予定はない)。
-   */
-  calculateLocationDistance(target: LocationModel, from?: LocationModel, altitude?: boolean): number {
-    if (typeof from === 'undefined') {
-      from = this.getCurrentLocation()
-    }
-
-    if (typeof altitude === 'undefined' || !altitude) {
-      return Math.hypot(target.coordinate.x - from.coordinate.x, target.coordinate.y - from.coordinate.y) * _Location.getBaseDistance()
-    } else {
-      if (typeof target.coordinate.z === 'undefined') {
-        target.coordinate.z = 0
-      }
-      if (typeof from.coordinate.z === 'undefined') {
-        from.coordinate.z = 0
-      }
-      return Math.hypot(target.coordinate.x - from.coordinate.x, target.coordinate.y - from.coordinate.y, target.coordinate.z - from.coordinate.z) * _Location.getBaseDistance()
-    }
-  }
 
   static getBaseDistance(): number {
     const result = sessionStorage.getItem('baseDistance')
@@ -84,5 +57,28 @@ export class _Location {
     } else {
       return parseInt(result)
     }
+  }
+
+  storeCurrentLocationId(currentLocation: LocationModel) {
+    localStorage.setItem('currentLocationId', currentLocation.id.toString())
+  }
+
+  /**
+   * ローカルストレージからIDを取り出し、なかったら初期値をセット
+   */
+  loadCurrentLocation() {
+    const id = localStorage.getItem('currentLocationId')
+    let location
+
+    if (id !== null) {
+      location = this.getLocationById(parseInt(id))
+    }
+
+    if (typeof location === 'undefined') {
+      // 初期値であるid 0は工房を示す。
+      location = <LocationModel>this.getLocationById(0)
+    }
+
+    this.currentLocation = location
   }
 }
