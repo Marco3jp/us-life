@@ -76,9 +76,10 @@ export let EventList: Array<EventModel> = [
   {
     effect: (params) => {
       params.flag.setFlag('costco', true)
+      params.state.gameDate.progress(params.state.gameDate.calculateProgressLength('1-0-0')) // 18:00 -> 19:00
     },
     id: 2,
-    name: 'コストコの旅',
+    name: 'コ○トコの旅',
     require: (params) => {
       return params.flag.getFlag('completedOpening')
         && !params.flag.getFlag('costco')
@@ -100,13 +101,241 @@ export let EventList: Array<EventModel> = [
           type: SectionType.TEXT
         },
         {
-          body: ControlEnum.endSection,
+          body: {
+            by: characterName.a,
+            text: 'まあその通り……。いい感じだったからって書いてたら4時だった……。'
+          },
+          type: SectionType.TEXT
+        },
+        {
+          body: {
+            by: characterName.c,
+            text: 'いつもどおりね。私は昨日14時間寝て昼夜逆転が直ったわ。'
+          },
+          type: SectionType.TEXT
+        },
+        {
+          body: {
+            by: characterName.a,
+            text: 'どうせ数日で戻るくせに。'
+          },
+          type: SectionType.TEXT
+        },
+        {
+          body: {
+            by: characterName.c,
+            text: 'それはそれ、これはこれよ。'
+          },
+          type: SectionType.TEXT
+        },
+        {
+          body: {
+            by: '',
+            text: 'そんな意味不明でいつもどおりな会話をしていると、すぐに到着してしまうものだ。さて――何を買おうか。'
+          },
+          type: SectionType.TEXT
+        },
+        {
+          body: ControlEnum.selectChildAction,
           type: SectionType.CONTROL
+        }
+      ],
+      childActions: [
+        {
+          effect: (params: Params) => {
+            params.state.inventory.addItem(1, 8)
+            params.state.inventory.addItem(2, 4)
+            params.state.gameDate.progress(params.state.gameDate.calculateProgressLength('1-30-0')) // 19:00 -> 20:30
+          },
+          effectText: 'ピザ一枚(8ピース)、BLTサンドイッチ(4個入り)を買う',
+          id: 50,
+          name: 'やっぱりコ○トコはジャンクフード',
+          require: () => {
+            return true
+          },
+          requireText: '',
+          script: {
+            sections: [
+              {
+                body: {
+                  by: '',
+                  text: 'わざわざコストコに来たしジャンクフードを買いたいと思い、ピザとBLTサンドイッチを買うことにした。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: {
+                  by: characterName.c,
+                  text: 'まあ作業中に食べるのは気が引けるけど、重いから腹持ちも悪くはないのよね……。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: {
+                  by: '',
+                  text: 'そう言いながら、何かを気にしてかハーフピザとサラダサンドイッチを選んでいる。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: {
+                  by: characterName.b,
+                  text: '俺は前回買ったやつらがまだまだ残ってるから少しだけにしておくかなぁ。今日明日くらいで食べられる量にしておけばいいだろう。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: {
+                  by: '',
+                  text: 'そういってBLTとホットドッグを選んだらしい。確かにつまんでいれば明日、明後日くらいにはなくなっていることだろう'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: {
+                  by: '',
+                  text: 'そんなこんなで買い物を終え、帰路につく頃には1時間半も経っていた。実をいうと食品以外の家電やらに時間をやけに食ったせいだったりする。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: {
+                  by: '',
+                  text: 'これでまあ、明日から作業しながら食べられるものにありつけたし問題はないだろう。一行はいつものごとく、工房へと向かうのだった。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: ControlEnum.endSection,
+                type: SectionType.CONTROL
+              }
+            ]
+          }
+        }, {
+          effect: (params: Params) => {
+            params.state.inventory.addItem(4, 8)
+            params.state.inventory.addItem(2, 4)
+            params.state.gameDate.progress(params.state.gameDate.calculateProgressLength('1-30-0')) // 19:00 -> 20:30
+          },
+          effectText: 'パックご飯(8個)、BLTサンドイッチ(4個入り)を買う',
+          id: 51,
+          name: '主食は米以外ありえない！',
+          require: () => {
+            return true
+          },
+          requireText: '',
+          script: {
+            sections: [
+              {
+                body: {
+                  by: '',
+                  text: '腹持ち考えたら米以外ありえないだろうという考えから大量のパックご飯を買い込んだ。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: {
+                  by: characterName.c,
+                  text: 'いつもどおりの買い方ね……。私も同じでいいかしら。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: {
+                  by: '',
+                  text: '作業しているときに買い物に行くのがめんどくさいので、普段から多く買い込む癖があったりする。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: {
+                  by: characterName.b,
+                  text: '俺は前回買ったやつらがまだまだ残ってるから少しだけにしておくかなぁ。どうせ賞味期限も長いし、買っておいて問題はないだろ。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: {
+                  by: '',
+                  text: 'そういってそれなりの量をカートに入れていく。まあ、実際賞味期限の長いものだから問題ないんだけど。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: {
+                  by: '',
+                  text: 'そんなこんなで買い物を終え、帰路につく頃には1時間半も経っていた。実をいうと食品以外の家電やらに時間をやけに食ったせいだったりする。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: {
+                  by: '',
+                  text: 'これでまあ、明日から作業しながら食べられるものにありつけたし問題はないだろう。一行はいつものごとく、工房へと向かうのだった。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: ControlEnum.endSection,
+                type: SectionType.CONTROL
+              }
+            ]
+          }
+        }, {
+          effect: (params: Params) => {
+            params.state.inventory.addItem(1, 4)
+            params.state.inventory.addItem(2, 2)
+            params.state.inventory.addItem(3, 1)
+            params.state.inventory.addItem(4, 2)
+            params.state.gameDate.progress(params.state.gameDate.calculateProgressLength('2-0-0')) // 19:00 -> 21:00
+          },
+          effectText: 'ハーフピザ(4ピース)、ハーフBLTサンドイッチ(2個入り)、パン(1個)、パックご飯(2個)を買う',
+          id: 52,
+          name: 'ジャンクパンご飯チョイス――つまりバランス！',
+          require: () => {
+            return true
+          },
+          requireText: '',
+          script: {
+            sections: [
+              {
+                body: {
+                  by: '',
+                  text: '珍しく色々な主食を試してみることにした。普段はどれか一つを買い込むことが多いんだけど。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: {
+                  by: characterName.c,
+                  text: 'あら、なんか珍しい買い方ね……。うーん、真似してみようかしら。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: {
+                  by: '',
+                  text: '買い込むことが多いのは自分に限った話ではなくて、みんなそうだったりする。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: {
+                  by: characterName.b,
+                  text: '俺は前回買ったやつらがまだまだ残ってるんだよな。前回買わなかったやつでも買ってみるか。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: {
+                  by: '',
+                  text: 'そういってパンをカートに入れていった。たしか前回はピザだったような気がするが、素材は……まあ考えなくてもいいだろう。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: {
+                  by: '',
+                  text: 'そんなこんなで買い物を終え、帰路につく頃には2時間も経っていた。入ってそうそう家電コーナーで時間を食った挙げ句、いろんな主食を買うために行ったり来たりの繰り返しだったのが原因だろう。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: {
+                  by: '',
+                  text: 'これでまあ、明日から作業しながら食べられるものにありつけたし問題はないだろう。一行はいつものごとく、工房へと向かうのだった。'
+                },
+                type: SectionType.TEXT
+              }, {
+                body: ControlEnum.endSection,
+                type: SectionType.CONTROL
+              }
+            ]
+          }
         }
       ]
     },
     weight: 0
-
   },
   {
     effect: (params: Params) => {
@@ -386,7 +615,7 @@ export let EventList: Array<EventModel> = [
   },
   {
     effect: (params: Params) => {
-      params.state.inventory.addItem(100, 2) // 水
+      // params.state.inventory.addItem(100, 2) // 水
       params.state.inventory.addItem(101, 1) // 缶入りパン
       params.state.gameDate.progress(params.state.gameDate.calculateProgressLength('1-30-0'))
     },
