@@ -3,7 +3,8 @@ import { ViewScript } from '../model/viewScript'
 import { Params } from './params'
 import { EventList } from '../gameAssets/eventList'
 import { Action } from '../model/action'
-import { SentenceType } from '~/lib/model/viewScript/sentenceType'
+import { SectionType } from '~/lib/model/viewScript/sectionType'
+import { ErrorEnum } from '~/lib/model/viewScript/errorEnum'
 
 export class _Event {
   private eventDb: Array<EventModel>
@@ -48,7 +49,7 @@ export class _Event {
   }
 
   proceedCurrentlyEvent(force ?: boolean): ViewScript {
-    let result
+    let result: ViewScript | undefined
     if (this.cacheTime - Date.now() > 10000 && (typeof force === 'undefined' || !force)) {
       if (this.isEventing()) this.proceedCurrentlyEvent(true)
     }
@@ -60,24 +61,18 @@ export class _Event {
       if (result !== undefined) {
         result.toBeContinue = this.currentlyEvents.length !== 0
       } else {
-        result = {
-          sections: [{
-            type: SentenceType.TEXT,
-            body: {
-              text: 'sample',
-              by: 'test'
-            }
-          }]
+        result = event.script
+        if (typeof result === 'undefined') {
+          result = {
+            silent: true
+          }
         }
       }
     } else {
       result = {
         sections: [{
-          type: SentenceType.TEXT,
-          body: {
-            text: 'errorSample',
-            by: 'test'
-          }
+          type: SectionType.ERROR,
+          body: ErrorEnum.unknownError
         }]
       }
     }
