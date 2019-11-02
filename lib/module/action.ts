@@ -3,6 +3,7 @@ import { Params } from './params'
 import { ActionList } from '../gameAssets/actionList'
 import { ViewScript } from '../model/viewScript'
 import { SectionType } from '~/lib/model/viewScript/sectionType'
+import { ErrorEnum } from '~/lib/model/viewScript/errorEnum'
 
 export class Action {
   private actionDb: Array<ActionModel>
@@ -29,24 +30,18 @@ export class Action {
   act(action: ActionModel): ViewScript {
     if (action.require) {
       action.effect(this.params)
-      // TODO: 行動時に適切なViewScriptを返す
-      return {
-        sections: [{
-          type: SectionType.TEXT,
-          body: {
-            text: 'sample',
-            by: 'test'
-          }
-        }]
+      if (typeof action.script !== 'undefined') {
+        return action.script
+      } else {
+        return {
+          silent: true
+        }
       }
     } else {
       return {
         sections: [{
-          type: SectionType.TEXT,
-          body: {
-            text: 'errorSample',
-            by: 'test'
-          }
+          type: SectionType.ERROR,
+          body: ErrorEnum.isNotRequiredError
         }]
       }
     }
