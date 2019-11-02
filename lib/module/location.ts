@@ -10,6 +10,7 @@ export class _Location {
   private currentLocation: LocationModel
 
   constructor() {
+    this.locationIndex = new Map<number, number>()
     this.locationDb = LocationList
     this.locationDb.forEach((entry, index) => {
       this.locationIndex.set(entry.id, index)
