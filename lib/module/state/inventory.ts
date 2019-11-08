@@ -2,7 +2,7 @@ import { InventoryRecord } from '../../model/inventoryRecord'
 import { Params } from '../params'
 import { Item as ItemModel } from '../../model/item'
 import { ViewScript } from '../../model/viewScript'
-import { SentenceType } from '~/lib/model/viewScript/sentenceType'
+import { SectionType } from '~/lib/model/viewScript/sectionType'
 import { Item } from '~/lib/module/item'
 
 export class Inventory {
@@ -102,7 +102,7 @@ export class Inventory {
       // TODO: アイテム使用時に適切なViewScriptを返す
       return {
         sections: [{
-          type: SentenceType.TEXT,
+          type: SectionType.TEXT,
           body: {
             text: 'sample',
             by: 'test'
@@ -112,7 +112,7 @@ export class Inventory {
     } else {
       return {
         sections: [{
-          type: SentenceType.TEXT,
+          type: SectionType.TEXT,
           body: {
             text: 'errorSample',
             by: 'test'
