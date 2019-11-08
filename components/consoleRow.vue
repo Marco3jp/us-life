@@ -1,5 +1,9 @@
 <template>
-  <v-card outlined>{{sentence.by}}> {{this.row}}</v-card>
+  <v-card outlined>
+    <v-card-text class="body-0" ref="row">
+      {{sentence.by}}> {{this.row}}
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
