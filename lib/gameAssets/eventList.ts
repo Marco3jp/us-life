@@ -8,12 +8,12 @@ import { characterName } from '~/lib/gameAssets/characterName'
 export let EventList: Array<EventModel> = [
   {
     effect: (params) => {
-      params.flag.setFlag('completedOpening', true)
+      params.state.flag.setFlag('completedOpening', true)
     },
     id: 1,
     name: 'オープニング',
     require: (params) => {
-      return !params.flag.getFlag('completedOpening')
+      return !params.state.flag.getFlag('completedOpening')
     },
     script: {
       sections: [
@@ -75,14 +75,14 @@ export let EventList: Array<EventModel> = [
   },
   {
     effect: (params) => {
-      params.flag.setFlag('costco', true)
+      params.state.flag.setFlag('costco', true)
       params.state.gameDate.progress(params.state.gameDate.calculateProgressLength('1-0-0')) // 18:00 -> 19:00
     },
     id: 2,
     name: 'コ○トコの旅',
     require: (params) => {
-      return params.flag.getFlag('completedOpening')
-        && !params.flag.getFlag('costco')
+      return params.state.flag.getFlag('completedOpening')
+        && !params.state.flag.getFlag('costco')
     },
     script: {
       sections: [
@@ -146,6 +146,7 @@ export let EventList: Array<EventModel> = [
             params.state.inventory.addItem(1, 8)
             params.state.inventory.addItem(2, 4)
             params.state.gameDate.progress(params.state.gameDate.calculateProgressLength('1-30-0')) // 19:00 -> 20:30
+            params.state.flag.setFlag('exitCostco', true)
           },
           effectText: 'ピザ一枚(8ピース)、BLTサンドイッチ(4個入り)を買う',
           id: 50,
@@ -209,6 +210,7 @@ export let EventList: Array<EventModel> = [
             params.state.inventory.addItem(4, 8)
             params.state.inventory.addItem(2, 4)
             params.state.gameDate.progress(params.state.gameDate.calculateProgressLength('1-30-0')) // 19:00 -> 20:30
+            params.state.flag.setFlag('exitCostco', true)
           },
           effectText: 'パックご飯(8個)、BLTサンドイッチ(4個入り)を買う',
           id: 51,
@@ -274,6 +276,7 @@ export let EventList: Array<EventModel> = [
             params.state.inventory.addItem(3, 1)
             params.state.inventory.addItem(4, 2)
             params.state.gameDate.progress(params.state.gameDate.calculateProgressLength('2-0-0')) // 19:00 -> 21:00
+            params.state.flag.setFlag('exitCostco', true)
           },
           effectText: 'ハーフピザ(4ピース)、ハーフBLTサンドイッチ(2個入り)、パン(1個)、パックご飯(2個)を買う',
           id: 52,
