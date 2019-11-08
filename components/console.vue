@@ -6,14 +6,18 @@
 </template>
 
 <script>
-  import ConsoleRow from '~/components/consoleRow'
+  import ConsoleRow from './consoleRow'
 
   export default {
     name: 'console',
     components: { ConsoleRow },
+    props: ['doScrollBottom'],
     computed: {
       scrollbackBuffer() {
         return this.$store.state.console.scrollback
+      },
+      isLoading() {
+        return this.$store.state.console.isLoading
       }
     }
   }

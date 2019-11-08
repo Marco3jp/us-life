@@ -12,10 +12,21 @@
     props: ['sentence', 'isCurrentRow'],
     computed: {
       row() {
-        if (this.isCurrentRow && !this.$store.state.sentence.isEndSection) {
-          return this.sentence.text.substring(0, this.$store.state.sentence.characterPosition)
+        if (this.isCurrentRow && !this.$store.state.view.isEndSection) {
+          return this.sentence.text.substring(0, this.$store.state.view.characterPosition)
         } else {
           return this.sentence.text
+        }
+      },
+      scrollBottom() {
+        return this.$store.state.console.doScrollBottom
+      }
+    },
+    watch: {
+      'scrollBottom': function(val) {
+        if (val && this.isCurrentRow) {
+          this.$refs.row.scrollIntoView(true)
+          this.$store.commit('console/doneScrollBottom')
         }
       }
     }
