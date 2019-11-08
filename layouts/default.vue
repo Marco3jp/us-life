@@ -39,11 +39,20 @@
 </template>
 
 <script>
+  import { LightLife } from '~/lib/lightLife'
+
   export default {
     data() {
       return {
         title: 'us-life'
       }
+    },
+    created() {
+      const exitCostco = localStorage.getItem('exitCostco')
+      if (exitCostco === null || !exitCostco) {
+        localStorage.clear()
+      }
+      window.life = new LightLife()
     }
   }
 </script>
