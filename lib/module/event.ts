@@ -14,6 +14,7 @@ export class _Event {
 
   constructor() {
     this.eventDb = EventList
+    this.currentlyEvents = []
   }
 
   setParams(params: Params) {
