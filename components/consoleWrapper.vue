@@ -75,7 +75,7 @@
       startAutoCharacterDisplay() {
         this.timer = setInterval(() => {
           this.$store.dispatch('view/nextCharacter')
-          if (this.$store.state.view.characterPosition > this.$store.state.view.currentSentenceLength && !this.$store.state.view.endSection) {
+          if (this.$store.state.view.characterPosition >= this.$store.state.view.currentSentenceLength && !this.$store.state.view.endSection) {
             clearInterval(this.timer)
             this.$store.commit('view/endSection')
           }
