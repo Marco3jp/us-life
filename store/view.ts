@@ -58,7 +58,7 @@ export const actions = {
     if (!context.isEndSection) {
       context.commit('incrementCharacterPosition')
       if (context.characterPosition >= context.currentSentenceLength) {
-        context.endSection(state)
+        context.commit('endSection')
       }
     }
   },
