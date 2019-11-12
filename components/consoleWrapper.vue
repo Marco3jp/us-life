@@ -57,6 +57,9 @@
             this.endScene() // 終わったことにしておく
         }
       },
+      /**
+       * クリックを受け取ってタイマーのリセット、末尾まで表示させるか次の行を始める
+       */
       progressSentence() {
         clearInterval(this.timer)
         if (!this.$store.state.view.isEndScene) {
