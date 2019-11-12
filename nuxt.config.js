@@ -14,7 +14,12 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        type: 'text/css',
+        href: 'https://fonts.googleapis.com/css?family=Noto+Serif+JP&display=swap'
+      }
     ]
   },
   /*
@@ -39,7 +44,7 @@ export default {
   /*
   ** Nuxt.js modules
   */
-  modules: ['nuxt-webfontloader'],
+  modules: [],
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module
@@ -59,11 +64,6 @@ export default {
           success: colors.green.accent3
         }
       }
-    }
-  },
-  webfontloader: {
-    google: {
-      families: ['Noto+Sans+JP']
     }
   },
   /*
