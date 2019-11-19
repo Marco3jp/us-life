@@ -28,7 +28,6 @@
     // このIssueは https://github.com/Marco3jp/us-life/issues/6 で管理される。
     mounted() {
       this.unSubscribe = this.$store.subscribe((mutation) => {
-        console.log(this.isCurrentRow, mutation.type, this.$refs, this.sentence)
         if (mutation.type === 'console/scrollBottom' && this.isCurrentRow && typeof this.$refs.row !== 'undefined') {
           this.$refs.row.scrollIntoView()
           this.$store.commit('console/doneScrollBottom')
