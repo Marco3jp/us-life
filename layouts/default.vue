@@ -13,17 +13,15 @@
         <v-btn text>ItemC</v-btn>
       </v-toolbar-items>
 
-      <template>
-        <v-btn icon>
-          <v-icon>mdi-export-variant</v-icon>
+      <v-toolbar-items>
+        <v-btn icon href="https://github.com/Marco3jp/us-life" target="_blank">
+          <v-icon>fab fa-github</v-icon>
         </v-btn>
-        <v-btn icon>
-          <v-icon>mdi-delete-circle</v-icon>
+        <v-btn text href="https://twitter.com/intent/tweet?text=us-life&url=https://us-life.marco.plus" target="_blank">
+          <v-icon>fab fa-twitter</v-icon>
+          <span>Tweet</span>
         </v-btn>
-        <v-btn icon>
-          <v-icon>mdi-plus-circle</v-icon>
-        </v-btn>
-      </template>
+      </v-toolbar-items>
     </v-toolbar>
 
     <v-content>
