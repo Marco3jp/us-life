@@ -18,6 +18,8 @@ export class State {
     this.gameDate = new GameDate()
     this.values = new Values()
     this.status = new Status()
+
+    Status.initialize(this.status)
   }
 
   setParams(params: Params) {
