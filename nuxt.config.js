@@ -29,7 +29,7 @@ export default {
   /*
   ** Global CSS
   */
-  css: ['~/assets/fonts.scss', '~/assets/general.scss'],
+  css: ['~/assets/fonts.scss', '~/assets/general.scss', '~/node_modules/@fortawesome/fontawesome-free/css/all.css'],
   /*
   ** Plugins to load before mounting the App
   */
@@ -64,6 +64,9 @@ export default {
           success: colors.green.accent3
         }
       }
+    },
+    icons: {
+      iconfont: 'fa'
     }
   },
   /*
