@@ -25,14 +25,12 @@ export const mutations = {
     state.doScrollBottom = false
   },
   clearScrollback(state) {
-    state.scrollback = []
+    state.scrollback.splice(0)
   },
   startLoading(state) {
-    console.log('start')
     state.isLoading = true
   },
   endLoading(state) {
-    console.log('end')
     state.isLoading = false
   }
 }
