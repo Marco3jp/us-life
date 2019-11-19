@@ -8,9 +8,7 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items>
-        <v-btn text>ItemA</v-btn>
-        <v-btn text>ItemB</v-btn>
-        <v-btn text>ItemC</v-btn>
+        <status-bar></status-bar>
       </v-toolbar-items>
 
       <v-toolbar-items>
@@ -38,8 +36,10 @@
 
 <script>
   import { LightLife } from '~/lib/lightLife'
+  import StatusBar from '~/components/statusBar'
 
   export default {
+    components: { StatusBar },
     data() {
       return {
         title: 'us-life'
