@@ -17,7 +17,7 @@
         </v-btn>
         <v-btn text href="https://twitter.com/intent/tweet?text=us-life&url=https://us-life.marco.plus" target="_blank">
           <v-icon>fab fa-twitter</v-icon>
-          <span>Tweet</span>
+          <span class="ml-1">Tweet</span>
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
