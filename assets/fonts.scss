@@ -2,6 +2,10 @@ body .v-application.custom-font, body .v-application.custom-font .headline {
   font-family: 'Noto Serif JP', sans-serif !important;
 }
 
+body .v-application.custom-font .v-toolbar {
+  font-family: 'Roboto', serif !important;
+}
+
 .v-application .body-0 {
   font-size: 1.2rem !important;
   font-weight: 400;
