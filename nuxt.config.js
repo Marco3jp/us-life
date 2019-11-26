@@ -29,7 +29,7 @@ export default {
   /*
   ** Global CSS
   */
-  css: ['~/assets/fonts.scss', '~/assets/general.scss', '~/node_modules/@fortawesome/fontawesome-free/css/all.css'],
+  css: ['~/assets/fonts.scss', '~/assets/general.scss', '~/assets/overrideVuetifyComponentStyle.scss', '~/node_modules/@fortawesome/fontawesome-free/css/all.css'],
   /*
   ** Plugins to load before mounting the App
   */
