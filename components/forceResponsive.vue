@@ -28,11 +28,15 @@
           if (!this.isHorizontal) {
             this.isVertical = false
             this.isHorizontal = true
+            document.documentElement.classList.add('fit-height');
+            document.documentElement.classList.remove('fit-width');
           }
         } else {
           if (!this.isVertical) {
             this.isVertical = true
             this.isHorizontal = false
+            document.documentElement.classList.remove('fit-height');
+            document.documentElement.classList.add('fit-width');
           }
         }
       }
