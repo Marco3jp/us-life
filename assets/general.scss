@@ -1,3 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow: hidden !important;
+
+  &.fit-height {
+    font-size: 1.5vh;
+  }
+
+  &.fit-width {
+    font-size: 0.8vw;
+  }
+}
+
 .unset-link-color {
   color: #FFF !important;
   text-decoration: none !important;
