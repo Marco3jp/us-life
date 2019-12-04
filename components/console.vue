@@ -1,5 +1,5 @@
 <template>
-  <v-card raised height="600" width="1200" class="overflow-y-auto" :loading="isLoading">
+  <v-card raised height="100%" width="100%" class="overflow-y-auto" :loading="isLoading">
     <console-row v-for="(sentence, index) in scrollbackBuffer" :sentence="sentence" :key="index"
                  :isCurrentRow="scrollbackBuffer.length-1 === index"></console-row>
   </v-card>

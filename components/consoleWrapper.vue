@@ -1,5 +1,5 @@
 <template>
-  <div @click="progressSentence">
+  <div @click="progressSentence" :style="{height: height, width: width}">
     <console></console>
   </div>
 </template>
@@ -13,6 +13,7 @@
   export default {
     name: 'consoleWrapper',
     components: { Console },
+    props: ['height', 'width'],
     data() {
       return {
         timer: 0
