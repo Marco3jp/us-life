@@ -1,3 +1,19 @@
 .v-toolbar__content {
   height: 100% !important;
 }
+
+
+// FHDのときにちょうど16pxになるためのCSS //
+html {
+  &.fit-height {
+    .v-application p {
+      margin-bottom: calc(1600vh / 1080);
+    }
+  }
+
+  &.fit-width {
+    .v-application p {
+      margin-bottom: calc(1600vw / 1920);
+    }
+  }
+}
