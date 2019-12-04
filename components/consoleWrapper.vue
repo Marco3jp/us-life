@@ -60,14 +60,17 @@
       },
       /**
        * クリックを受け取ってタイマーのリセット、末尾まで表示させるか次の行を始める
+       * 下端へのスクロールフラグは次のTickで立てる(Tick内で処理が終わると最新の一つ前の要素にスクロールするため)
        */
       progressSentence() {
         clearInterval(this.timer)
         if (!this.$store.state.view.isEndScene) {
           if (this.$store.state.view.isEndSection) {
             this.$store.commit('view/incrementCurrentSection')
-            this.$store.commit('console/scrollBottom')
             this.parseViewScript()
+            this.$nextTick(function() {
+              this.$store.commit('console/scrollBottom')
+            })
           } else {
             this.$store.commit('view/endSection')
           }

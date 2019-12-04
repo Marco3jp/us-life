@@ -29,7 +29,7 @@
     mounted() {
       this.unSubscribe = this.$store.subscribe((mutation) => {
         if (mutation.type === 'console/scrollBottom' && this.isCurrentRow && typeof this.$refs.row !== 'undefined') {
-          this.$refs.row.scrollIntoView()
+          this.$refs.row.scrollIntoView(false)
           this.$store.commit('console/doneScrollBottom')
         }
       })
