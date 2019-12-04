@@ -9,15 +9,29 @@
 <script>
   export default {
     name: 'statusBar',
-    computed: {
-      health: function() {
-        return life.state.status.health
-      },
-      hanger: function() {
-        return life.state.status.hanger
-      },
-      sleepy: function() {
-        return life.state.status.sleepy
+    data: function() {
+      return {
+        health: '',
+        hanger: '',
+        sleepy: ''
+      }
+    },
+    mounted() {
+      this.syncStatus()
+    },
+    methods: {
+      syncStatus: function() {
+        this.health = life.state.status.health
+        this.hanger = life.state.status.hanger
+        this.sleepy = life.state.status.sleepy
+      }
+    },
+    watch: {
+      'this.$store.state.notify.changedStatus': function(val) {
+        if (val) {
+          this.syncStatus()
+          this.$store.commit('notify/resetStatusEvent')
+        }
       }
     }
   }
