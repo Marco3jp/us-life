@@ -25,6 +25,21 @@
       },
       isLoading() {
         return this.$store.state.console.isLoading
+      },
+      currentSection() {
+        return this.$store.state.view.currentSection
+      },
+      isEndScene() {
+        return this.$store.state.view.isEndScene
+      },
+      isEndSection() {
+        return this.$store.state.view.isEndSection
+      },
+      characterPosition() {
+        return this.$store.state.view.characterPosition
+      },
+      currentSentenceLength() {
+        return this.$store.state.view.currentSentenceLength
       }
     },
     created() {
@@ -40,7 +55,7 @@
           this.endScene()
         }
 
-        switch (this.viewScript.sections[this.$store.state.view.currentSection].type) {
+        switch (this.viewScript.sections[this.currentSection].type) {
           case SectionType.TEXT:
             this.parseText()
             break
@@ -64,8 +79,8 @@
        */
       progressSentence() {
         clearInterval(this.timer)
-        if (!this.$store.state.view.isEndScene) {
-          if (this.$store.state.view.isEndSection) {
+        if (!this.isEndScene) {
+          if (this.isEndSection) {
             this.$store.commit('view/incrementCurrentSection')
             this.parseViewScript()
             this.$nextTick(function() {
@@ -79,7 +94,7 @@
       startAutoCharacterDisplay() {
         this.timer = setInterval(() => {
           this.$store.dispatch('view/nextCharacter')
-          if (this.$store.state.view.characterPosition >= this.$store.state.view.currentSentenceLength && !this.$store.state.view.endSection) {
+          if (this.characterPosition >= this.currentSentenceLength && !this.isEndSection) {
             clearInterval(this.timer)
             this.$store.commit('view/endSection')
           }
@@ -88,15 +103,21 @@
       parseText() {
         this.$store.commit('view/resetCharacter')
         this.$store.commit('view/resetSection')
-        this.$store.commit('view/setCurrentSentenceLength', this.viewScript.sections[this.$store.state.view.currentSection].body.text.length)
-        this.$store.commit('console/push', this.viewScript.sections[this.$store.state.view.currentSection].body)
+        this.$store.commit('view/setCurrentSentenceLength', this.viewScript.sections[this.currentSection].body.text.length)
+        this.$store.commit('console/push', this.viewScript.sections[this.currentSection].body)
         this.startAutoCharacterDisplay()
       },
       parseControl() {
-        if (this.viewScript.sections[this.$store.state.view.currentSection].body === ControlEnum.endSection) {
-          this.endScene()
-        } else {
-          this.parseViewScript()
+        switch (this.viewScript.sections[this.currentSection].body) {
+          case ControlEnum.endSection:
+            this.endScene()
+            break
+          case ControlEnum.selectChildAction:
+            this.$emit('showSelection')
+            break
+          default:
+            this.parseViewScript()
+            break
         }
       },
       parseDirection() {
